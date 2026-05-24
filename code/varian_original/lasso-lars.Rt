@@ -1,0 +1,52 @@
+> ###################################################
+> # R code for "Big Data: New Tricks for Econometrics
+> # Journal of Economic Perspectives 28(2), 3-28            
+> # http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3
+> # Hal R. Varian
+> ###################################################
+> 
+> # do lasso calculations using lars package
+> 
+> dat <- read.csv("FLS-data.csv")
+> library(lars)
+> 
+> # arrange data for estimation
+> x <- as.matrix(dat[,-1])
+> y <- dat[,1]
+> # estimate
+> model.lasso <- lars(x,y,type="lasso")
+> # cross validation for tuning parameter
+> cv1 <- cv.lars(x,y)
+> model.lasso <- lars(x,y,type="lasso")
+> 
+> # since the data set is small we will average over 5 cross validations
+> cv.all <- cv1$cv
+> cv.index <- cv1$index
+> for(t in 2:5) cv.all <- cv.all+cv.lars(x,y)$cv
+> plot(cv.all ~ cv.index)
+> # looks like minimum is .20
+> sval <- .20
+> # predict
+> p1 <- predict.lars(model.lasso,x,s=sval,mode="fraction")
+> p2 <- predict.lars(model.lasso,x,s=sval,mode="fraction",type="coef")
+> 
+> # coefficients that are not zero
+> fit.coef <- p2$coef[p2$coef != 0]
+> fit.coef
+ Confuncious    Equip.Inv    SubSahara       Muslim     Yrs.Open      Eco.Org 
+ 6.014933111 17.285679931 -0.311090046  0.258546405  0.710297390  0.102006297 
+ Protestants   NEquip.Inv       Mining   LatAmerica       Buddha   R.FEX.Dist 
+-1.032582757  3.666175123  0.036522981 -0.122352442  1.296931610 -0.001111798 
+         Age     std.BMP.         Area 
+-0.001819317 -0.007374693 -0.013149642 
+> 
+> # in order of absolute value
+> abs.order <- order(abs(fit.coef))
+> rev(fit.coef[abs.order])
+   Equip.Inv  Confuncious   NEquip.Inv       Buddha  Protestants     Yrs.Open 
+17.285679931  6.014933111  3.666175123  1.296931610 -1.032582757  0.710297390 
+   SubSahara       Muslim   LatAmerica      Eco.Org       Mining         Area 
+-0.311090046  0.258546405 -0.122352442  0.102006297  0.036522981 -0.013149642 
+    std.BMP.          Age   R.FEX.Dist 
+-0.007374693 -0.001819317 -0.001111798 
+> 

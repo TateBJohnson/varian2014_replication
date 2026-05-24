@@ -1,0 +1,51 @@
+> ###################################################
+> # R code for "Big Data: New Tricks for Econometrics
+> # Journal of Economic Perspectives 28(2), 3-28            
+> # http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3
+> # Hal R. Varian
+> ###################################################
+> library(glmnet)
+> dat <- read.csv("/home/hal/Working/JEP/Lasso/FLS-data.csv")
+> 
+> # for reproducability
+> set.seed(1234)
+> 
+> # arrange data and estimate
+> x <- as.matrix(dat[,-1])
+> y <- dat[,1]
+> model.lasso <- glmnet(x,y)
+> 
+> # cross validation to pick lambda
+> cv.out <- cv.glmnet(x,y)
+> plot(cv.out)
+> # pick best lambda
+> best.lambda <- cv.out$lambda.min
+> best.lambda
+[1] 0.1489301
+> # convert to logs to compare to plot
+> log(best.lambda)
+[1] -1.904278
+> 
+> # estimate model and look at coefficients
+> model.coef <- predict(model.lasso,s=best.lambda,type="coef")[1:42,]
+> model.coef.ne0 <- model.coef[model.coef != 0]
+> abs.order <- order(abs(model.coef.ne0))
+> rev(model.coef.ne0[abs.order])
+   Equip.Inv  Confuncious   NEquip.Inv       Buddha  Protestants     Yrs.Open 
+17.116966802  5.974455473  3.495320228  1.312967263 -0.975556256  0.722221650 
+ (Intercept)    SubSahara       Muslim      Eco.Org   LatAmerica     std.BMP. 
+ 0.364198094 -0.276724434  0.237938283  0.094933043 -0.093572002 -0.006861849 
+        Area          Age   R.FEX.Dist 
+-0.005188762 -0.001341366 -0.001045834 
+> 
+> # compute prediction
+> y.pred <- predict(model.lasso,s=best.lambda,newx=x)
+> error <- abs((y-y.pred)/y)
+> mean(error)
+[1] 1.211329
+> 
+> # note huge outlier at obs 38
+> # what country is it?
+> mean(error[-38])
+[1] 0.6751666
+> 

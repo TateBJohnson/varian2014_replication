@@ -1,0 +1,19 @@
+# Draft working files
+drafts/
+
+# Regenerable intermediate files
+temp/
+
+# R artifacts
+.Rhistory
+.RData
+*.Rproj
+
+# LaTeX artifacts
+*.aux
+*.log
+*.out
+*.toc
+
+# Mac junk
+.DS_Store
