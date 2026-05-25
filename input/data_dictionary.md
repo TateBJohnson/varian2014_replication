@@ -4,7 +4,6 @@
 Source: Fernandez, C., Ley, E., and Steel, M. F. J. (2001). "Model Uncertainty in Cross-Country Growth
 Regressions." *Journal of Applied Econometrics*, 16(5): 563–576.
 Originally compiled from Sala-i-Martín (1997). Hosted by Varian (2014) on openICPSR project 113925.
-Variable descriptions from BMS R package documentation (datafls).
 
 N = 72 countries, 42 variables (1 outcome + 41 covariates), period: 1960–1985.
 
