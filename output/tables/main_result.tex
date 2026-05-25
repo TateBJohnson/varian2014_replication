@@ -1,0 +1,22 @@
+\begin{table}[h]
+\centering
+\caption{Replication of Table 4 (LASSO Column): Variable Rankings for Predictors of Economic Growth}
+\label{tab:main}
+\begin{tabular}{lcc}
+\hline
+\textit{Predictor} & \textit{Varian (2014)} & \textit{Updated (glmnet 4.1-10)} \\
+\hline
+GDP level 1960 & - & 6 \\
+Fraction Confucian & 2 & 2 \\
+Life expectancy & - & 23 \\
+Equipment investment & 1 & 1 \\
+Sub-Saharan dummy & 7 & 8 \\
+Fraction Muslim & 8 & 10 \\
+Rule of law & - & 12 \\
+Open economy & 6 & 11 \\
+Degree of capitalism & 9 & 19 \\
+Fraction Protestant & 5 & 7 \\
+\hline
+\multicolumn{3}{p{0.85\textwidth}}{\small \textit{Notes:} Rankings show the ordinal importance of each variable among those selected by LASSO. A dash indicates the variable was shrunk to exactly zero. Varian's results use $\lambda = 0.1489$ (original cross-validation, glmnet circa 2014). Updated results use $\lambda$ selected by cross-validation with glmnet 4.1-10.}
+\end{tabular}
+\end{table}

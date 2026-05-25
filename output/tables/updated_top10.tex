@@ -1,0 +1,22 @@
+\begin{table}[h]
+\centering
+\caption{Top 10 Predictors of Economic Growth: Updated LASSO (glmnet 4.1-10)}
+\label{tab:top10}
+\begin{tabular}{lcc}
+\hline
+\textit{Rank} & \textit{Predictor} & \textit{Coefficient} \\
+\hline
+1 & Equip.Inv & $11.9388$ \\
+2 & Confuncious & $5.4796$ \\
+3 & NEquip.Inv & $4.4918$ \\
+4 & Mining & $2.6488$ \\
+5 & Buddha & $1.1158$ \\
+6 & GDPsh560 & $-1.0406$ \\
+7 & Protestants & $-1.0326$ \\
+8 & SubSahara & $-0.9987$ \\
+9 & Hindu & $-0.6418$ \\
+10 & Muslim & $0.629$ \\
+\hline
+\multicolumn{3}{p{0.75\textwidth}}{\small \textit{Notes:} Coefficients from LASSO with $\lambda = 0.0405$ selected by 10-fold cross-validation using glmnet 4.1-10.}
+\end{tabular}
+\end{table}
