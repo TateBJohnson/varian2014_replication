@@ -34,4 +34,23 @@ These rankings are produced by fitting LASSO with penalty parameter $\lambda = 0
 
 ## 5. Why This Paper Interests Me
 
-Varian (2014) is a landmark paper that introduced machine learning methods to a broad economics audience, arguing that LASSO and related techniques offer powerful tools for variable selection that are underutilized in empirical economics. This paper is directly relevant to the causal ML methods covered in GSE 552 — LASSO variable selection is the first step in pipelines like Double LASSO (Belloni et al., 2014) and Double/Debiased ML (Chernozhukov et al., 2018), making it a natural bridge between prediction and causal inference.
+Varian (2014) is a landmark paper that introduced machine learning methods to
+a broad economics audience, arguing that LASSO and related techniques offer
+powerful tools for variable selection that are underutilized in empirical
+economics. The paper is directly relevant to the causal ML methods covered in
+GSE 552 — LASSO variable selection is the first step in pipelines like Double
+LASSO (Belloni et al., 2014) and Double/Debiased ML (Chernozhukov et al.,
+2018), making it a natural bridge between prediction and causal inference.
+
+What I find most striking about this paper is the computational contrast at its
+center. Sala-i-Martín (1997) famously ran over two million regressions —
+exhaustively evaluating all manageable subsets of 41 growth covariates — to
+construct his CDF(0) measure of variable importance. Varian shows that LASSO
+arrives at a strikingly similar ranking of important predictors by solving a
+single penalized regression. The top variables identified by both approaches
+overlap substantially, yet LASSO requires a fraction of a second of compute
+time rather than millions of model evaluations. This efficiency is not merely
+convenient: it scales to settings where exhaustive search is computationally
+infeasible, which is precisely the high-dimensional world that modern causal ML
+inhabits. Replicating this result felt like watching the punchline of Varian's
+paper land in real time.
