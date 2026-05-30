@@ -32,6 +32,7 @@ X <- dat[, -1]         # 41 covariates
 
 # --- Write to temp/ -----------------------------------------------------------
 
+dir.create("temp", showWarnings = FALSE)
 write.csv(dat, "temp/clean_data.csv", row.names = FALSE)
 
 # --- Console Summary ----------------------------------------------------------
