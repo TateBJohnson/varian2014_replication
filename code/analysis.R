@@ -173,7 +173,8 @@ cat("\nTable saved: output/tables/main_result.tex\n")
 
 top10.upd   <- head(ranked.upd, 10)
 top10.names <- names(top10.upd)
-top10.coefs <- round(top10.upd, 4)
+top10.names <- gsub("Confuncious", "Confucian", top10.names)
+top10.coefs <- formatC(top10.upd, format = "f", digits = 4)
 
 lines2 <- c(
   "\\begin{table}[h]",
